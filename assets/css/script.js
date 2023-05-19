@@ -27,8 +27,6 @@ function pushToArray(lowNum, highNum) {
 function generatePassword() {
 
   var password = ""
-  
-  // how long
   var charAmount = Number(prompt("Select a character count between 8 and 128: "));
   var includeUppercase = confirm("Do you want to include uppercase characters?");
   var includeLowercase = confirm("Do you want to include lowercase characters?");
