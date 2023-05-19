@@ -1,66 +1,81 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-
-//DATA
-var uppercaseCharCodes = pushToArray(65, 90);
-var lowercaseCharCodes = pushToArray(97, 122);
-var numCharCodes = pushToArray(48, 57);
-var symbolCharCodes = pushToArray(33,47).concat(pushToArray(58,64));
-
-var uppercaseLetters = uppercaseCharCodes.map(code => String.fromCharCode(code));
-var lowercaseLetters = lowercaseCharCodes.map(code => String.fromCharCode(code));
-var numbers = numCharCodes.map(code => String.fromCharCode(code));
-var symbols = symbolCharCodes.map(code => String.fromCharCode(code));
-
-// FUNCTIONS
-function pushToArray(lowNum, highNum) {
-  var array = []
-  for (var i = lowNum; i <= highNum; i++) {
-    array.push(i)
-  }
-  return array
-};
-
-
 function generatePassword() {
 
-  var password = ""
-  var charAmount = Number(prompt("Select a character count between 8 and 128: "));
-  var includeUppercase = confirm("Do you want to include uppercase characters?");
-  var includeLowercase = confirm("Do you want to include lowercase characters?");
-  var includeNum = confirm("Do you want to include number characters?");
-  var includeSymbol = confirm("Do you want to include symbol characters?");
+// Arrays
 
-  passwordCharacters = [];
-  if (includeUppercase) {
-    passwordCharacters = passwordCharacters.concat(uppercaseLetters)
-  };
-  if (includeLowercase) {
-    passwordCharacters = passwordCharacters.concat(lowercaseLetters)
-  };
-  if (includeNum) {
-    passwordCharacters = passwordCharacters.concat(numbers)
-  };
-  if (includeSymbol) {
-    passwordCharacters = passwordCharacters.concat(symbols)
-  };
+var upChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lowChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",  "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var numS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var symS = ["@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+"];
 
-  for (i = 0; i < charAmount; i++) {
-    var randomIndex = Math.floor(Math.random() * passwordCharacters.length);
-    password = password + passwordCharacters[randomIndex]
-  }
-  return password;
-};
+// empty arrays for storage purposes
 
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+var resArray = [];
+var userArray = [];
 
-  passwordText.value = password;
+// prompt vars
+
+var userInt = parseInt(prompt("Please input a password length (at least 8 characters but no more than 128 characters)."));
+
+
+// logged userInt to see user input
+console.log(userInt)
+
+// if conditioning & array concat
+// if any of these are true they will be added instead of creating multiple if(&&) statements
+if (!userInt) {
+    alert("Please input a numeric value.")
+    return generatePassword()
+} else if (userInt < 8 || userInt > 128) {
+    alert("Please input a value between 8 & 128.")
+    return generatePassword()
+} else {
+    console.log('criteria met')
+
+    var confirmLower = confirm("Include Lower Case?");
+    var confirmUpper = confirm("Include Upper Case?");
+    var confirmNums = confirm("Include Numbers?");
+    var confirmSyms = confirm("Include Symbols?");
 }
 
+
+
+if(confirmNums) {
+    resArray = resArray.concat(numS);
+}
+if(confirmLower) {
+    resArray = resArray.concat(lowChar);
+}
+if(confirmUpper) {
+    resArray = resArray.concat(upChar);
+}
+if(confirmSyms) {
+    resArray = resArray.concat(symS);
+}
+
+// logged resArray to see if it concatted correctly
+console.log(resArray)
+
+// start random gen
+
+for (var i = 0; i < userInt; i++) {
+    // pushes our resArray into userArray
+    userArray.push(resArray[Math.floor(Math.random() * resArray.length)]);
+}
+
+console.log(userArray)
+
+// returns userArray converted to a string using 'Join'
+return userArray.join("");
+}
+
+function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    // password.Text will first run gen func then paste output val into passwordText area
+    passwordText.value = password;
+}
 // Add event listener to generate button
-// EVENT LISTENER
 generateBtn.addEventListener("click", writePassword);
