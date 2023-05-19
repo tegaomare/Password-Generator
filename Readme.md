@@ -10,8 +10,9 @@ This app will run in the browser and will feature dynamically updated HTML and C
 AS AN employee with access to sensitive data
 you WANT to randomly generate a password that meets certain criteria
 SO THAT you can create a strong password that provides greater security
+
 ## Credits
-N/A
+https://github.com/DanielG808/password-generator
 
 ## License
 MIT license
