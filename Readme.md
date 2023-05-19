@@ -11,7 +11,7 @@ SO THAT you can create a strong password that provides greater security
 The password includes special characters.
 
 ## Credits
-https://github.com/DanielG808/password-generator
+Sameer
 
 ## License
 MIT license
